@@ -9,7 +9,7 @@ def main():
         product_amazon.print_product_info()
 
         print("Would you like to search for the product automatically on Flipkart?")
-        print("Press 'y' to continue. Press any other key to enter the link manually.")
+        print("Press 'y' to continue. Or Enter the Flipkart URL")
         response = input("> ")
 
         if response == "y" or response == "Y":
@@ -17,7 +17,7 @@ def main():
             if (flipkart_link == "exit"):
                 sys.exit("Exiting...")
         else:
-            flipkart_link = input("Enter the Flipkart URL: ")
+            flipkart_link = response
         
         product_flipkart = flipkart(flipkart_link)
         product_flipkart.print_product_info()
@@ -27,7 +27,8 @@ def main():
         product_flipkart = flipkart(url)
         product_flipkart.print_product_info()
 
-        print("Would you like to search for the product automatically on Amazon? Press 'y' to continue. Press any other key to enter the link manually.")
+        print("Would you like to search for the product automatically on Amazon?")
+        print("Press 'y' to continue. Or Enter the Amazon URL")
         response = input("> ")
 
         if response == "y" or response == "Y":
@@ -35,7 +36,7 @@ def main():
             if (amazon_link == "exit"):
                 sys.exit("Exiting...")
         else:
-            amazon_link = input("Enter the Amazon URL: ")
+            amazon_link = response
 
         product_amazon = amazon(amazon_link)
         product_amazon.print_product_info()
