@@ -49,7 +49,8 @@ def main(*args):
         else:
             print("Website Not Supported")
     else:
-        platform = input("Where would you like to search that product? Amazon or Flipkart? ")
+        print("Where would you like to search the product? Amazon or Flipkart? ")
+        platform = input("> ")
         if platform == "amazon" or platform == "Amazon":
             main(amazon.search_item(response))
 
