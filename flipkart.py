@@ -49,12 +49,12 @@ class flipkart:
         prod_name = prod_name.replace(" ", "+")
         url = "https://www.flipkart.com/search?q=" + prod_name
         
-        request_status_code = requests.get(url, headers=header).status_code
+        response = requests.get(url, headers=header)
 
-        if request_status_code != 200:
-            sys.exit(f"- Unable to get the page. Error code: {request_status_code}")
+        if response.status_code != 200:
+            sys.exit(f"- Unable to get the page. Error code: {response.status_code}")
         
-        html_text = requests.get(url, headers=header).text
+        html_text = response.text
 
         soup = BeautifulSoup(html_text, 'lxml')
 
