@@ -15,24 +15,22 @@ header = {'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:120.0) Gecko/
 class amazon:
     def __init__(self, url):
         self.url = url
-        request_status_code = requests.get(url, headers=header).status_code
-        if request_status_code != 200:
-            sys.exit(f"Unable to get the page. Error code: {request_status_code}")
+        response = requests.get(url, headers=header)
+        if response.status_code != 200:
+            sys.exit(f"Unable to get the page. Error code: {response.status_code}")
         
-        html_text = requests.get(url, headers=header).text
+        html_text = response.content
 
         soup = BeautifulSoup(html_text, 'lxml')
-        
-        
+
         product_html_element = soup.find('span', id='productTitle')
+
         if self.__check_if_product_exists(product_html_element):
             self.name = product_html_element.text.strip()
-        
+            self.price = soup.find('span', class_="a-size-base a-color-price a-color-price").text
+
         else:
             sys.exit("Unable to get the product. Please check the URL and try again.")
-
-        self.price = soup.find('span', class_='a-price-whole').text
-
 
     def __check_if_product_exists(self, soup):
         if soup is None:
@@ -52,11 +50,12 @@ class amazon:
         prod_name = prod_name.replace(" ", "+")
         url = "https://www.amazon.in/s?k=" + prod_name
         
-        request_status_code = requests.get(url, headers=header).status_code
-        if request_status_code != 200:
-            sys.exit(f"Unable to get the page. Error code: {request_status_code}")
+        response = requests.get(url, headers=header)
+
+        if response.status_code != 200:
+            sys.exit(f"Unable to get the page. Error code: {response.status_code}")
         
-        html_text = requests.get(url, headers=header).text
+        html_text = response.text
 
         soup = BeautifulSoup(html_text, 'lxml')
 
