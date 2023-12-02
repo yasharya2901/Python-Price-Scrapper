@@ -52,11 +52,8 @@ class amazon:
         
         response = requests.get(url, headers=header)
 
-        for one in range(50):
-            if response.status_code != 200:
-                sys.exit(f"Unable to get the page. Error code: {response.status_code}")
-            else:
-                break
+        if response.status_code != 200:
+            sys.exit(f"Unable to get the page. Error code: {response.status_code}")
         
         html_text = response.text
 
