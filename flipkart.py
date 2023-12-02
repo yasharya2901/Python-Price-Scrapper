@@ -14,12 +14,12 @@ header = {'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:120.0) Gecko/
 class flipkart:
     def __init__(self, url):
         self.url = url
-        request_status_code = requests.get(url, headers=header).status_code
-        if request_status_code != 200:
-            sys.exit(f"Unable to get the page. Error code: {request_status_code}")
-        
-        html_text = requests.get(url, headers=header).text
+        response = requests.get(url, headers=header)
 
+        if response.status_code != 200:
+            sys.exit(f"Unable to get the page. Error code: {response.status_code}")
+        
+        html_text = response.text
         soup = BeautifulSoup(html_text, 'lxml')
 
         product_html_element = soup.find('span', class_='B_NuCI')
@@ -50,8 +50,9 @@ class flipkart:
         url = "https://www.flipkart.com/search?q=" + prod_name
         
         request_status_code = requests.get(url, headers=header).status_code
+
         if request_status_code != 200:
-            sys.exit(f"Unable to get the page. Error code: {request_status_code}")
+            sys.exit(f"- Unable to get the page. Error code: {request_status_code}")
         
         html_text = requests.get(url, headers=header).text
 
