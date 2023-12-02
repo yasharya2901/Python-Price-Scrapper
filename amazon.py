@@ -27,7 +27,7 @@ class amazon:
 
         if self.__check_if_product_exists(product_html_element):
             self.name = product_html_element.text.strip()
-            self.price = soup.find('span', class_="a-size-base a-color-price a-color-price").text
+            self.price = soup.find('span', class_="a-price-whole").text
 
         else:
             sys.exit("Unable to get the product. Please check the URL and try again.")
