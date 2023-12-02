@@ -1,5 +1,5 @@
-from amazon_scrapper import *
-from flipkart_scrapper import *
+from amazon import *
+from flipkart import *
 import sys
 
 def main(*args):
